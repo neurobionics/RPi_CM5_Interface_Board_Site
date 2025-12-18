@@ -1,18 +1,29 @@
 {
   "files": {
-    "main.css": "/RPi_CM5_Interface_Board_Site/static/css/main.92ddabbb.css",
-    "main.js": "/RPi_CM5_Interface_Board_Site/static/js/main.7a8d6958.js",
+    "main.css": "/RPi_CM5_Interface_Board_Site/static/css/main.a3d7a473.css",
+    "main.js": "/RPi_CM5_Interface_Board_Site/static/js/main.6a3db834.js",
     "static/js/453.2cf8ef01.chunk.js": "/RPi_CM5_Interface_Board_Site/static/js/453.2cf8ef01.chunk.js",
-    "static/media/pcb-layout.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-layout.11ef738b1dbca89aa44a.png",
-    "static/media/pcb-front.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-front.e76ac38e6a4939dafd5c.png",
-    "static/media/mechanical_specs.png": "/RPi_CM5_Interface_Board_Site/static/media/mechanical_specs.19dc4c122a255e6097c2.png",
+    "static/media/SPI1_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/SPI1_pinout.e4c792ce577b9feb9182.png",
+    "static/media/RPi_CM_interface_board_v.1.0.0_Schematic.pdf": "/RPi_CM5_Interface_Board_Site/static/media/RPi_CM_interface_board_v.1.0.0_Schematic.47f956c10b3da9706922.pdf",
+    "static/media/J6_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/J6_pinout.8f0b7611fc7d4f5f7136.png",
+    "static/media/RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf": "/RPi_CM5_Interface_Board_Site/static/media/RPi_CM5_interface_board_v.1.0.0_ Datasheet.9823dbdce5870c7be0b1.pdf",
+    "static/media/pcb-layout.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-layout.72866502180d6d0037ba.png",
+    "static/media/pcb-front.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-front.c8729e680405449782e1.png",
+    "static/media/CAN0_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/CAN0_pinout.a50c08ceac57bad088bd.png",
+    "static/media/I2C3_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/I2C3_pinout.2b2681fe28b13573293a.png",
+    "static/media/I2C2_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/I2C2_pinout.ccad76692fc70c78cf09.png",
+    "static/media/UART2_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/UART2_pinout.a5e4be0d2a2fd4057a6c.png",
+    "static/media/UART1_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/UART1_pinout.bc7b40ad1451cf64aab1.png",
+    "static/media/FAN_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/FAN_pinout.63fef42006e15eb2dec7.png",
+    "static/media/RPIBOOT_pinout.png": "/RPi_CM5_Interface_Board_Site/static/media/RPIBOOT_pinout.51d7a382c214d50e9344.png",
+    "static/media/mechanical_specs.png": "/RPi_CM5_Interface_Board_Site/static/media/mechanical_specs.fb319a3b2d7450f1ae5a.png",
     "index.html": "/RPi_CM5_Interface_Board_Site/index.html",
-    "main.92ddabbb.css.map": "/RPi_CM5_Interface_Board_Site/static/css/main.92ddabbb.css.map",
-    "main.7a8d6958.js.map": "/RPi_CM5_Interface_Board_Site/static/js/main.7a8d6958.js.map",
+    "main.a3d7a473.css.map": "/RPi_CM5_Interface_Board_Site/static/css/main.a3d7a473.css.map",
+    "main.6a3db834.js.map": "/RPi_CM5_Interface_Board_Site/static/js/main.6a3db834.js.map",
     "453.2cf8ef01.chunk.js.map": "/RPi_CM5_Interface_Board_Site/static/js/453.2cf8ef01.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.92ddabbb.css",
-    "static/js/main.7a8d6958.js"
+    "static/css/main.a3d7a473.css",
+    "static/js/main.6a3db834.js"
   ]
 }
