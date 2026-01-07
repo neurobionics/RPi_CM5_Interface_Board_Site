@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import InteractivePCB from "./InteractivePCB";
 import mechanicalSpecs from "./mechanical_specs.png";
+import imuSensingAxes from "./IMU_sensing_axes.png";
 import datasheetPDF from "./RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf";
-import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
+// import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
 
 function App() {
   return (
@@ -79,7 +80,7 @@ function About() {
           </svg>
           Download Datasheet
         </button>
-        <button
+        {/* <button
           className="download-button"
           onClick={() => handleDownload(schematicPDF, 'RPi_CM5_Interface_Board_Schematic.pdf')}
         >
@@ -89,7 +90,7 @@ function About() {
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
           Download Schematic
-        </button>
+        </button> */}
       </div>
       <button className="see-older-versions-about" onClick={scrollToArchive}>
         See older versions ↓
@@ -301,6 +302,22 @@ function IOPinsSection() {
                 <td>GPIO 7, 22, 23, 24, 25, 27</td>
                 <td>Header Pins, 8-Pin, 2.54 mm pitch</td>
               </tr>
+              <tr>
+                <td>
+                  <strong>J4</strong>
+                </td>
+                <td>For connecting external switch to RPi safe shutdown button</td>
+                <td>Molex PicoClasp, 2-Pin</td>
+                <td>
+                  <a
+                    href="https://www.tti.com/content/ttiinc/en/apps/part-detail.html?partsNumber=501331-0207&mfgShortname=MOL&utm=PNC2024&utm_term=501331-0207&gad_source=1&gad_campaignid=20878198023&gbraid=0AAAAADvyBAYlpdIrj3_VoOWbBV_LyPuHd&gclid=Cj0KCQiA6sjKBhCSARIsAJvYcpMLo20pU-iWSczj1KusdGSWY9HvQXdKQFdEqWIc83ize24FGx2gIfYaAv39EALw_wcB"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    501331-0207
+                  </a>
+                </td>
+              </tr>
             </tbody>
           </table>
 
@@ -387,6 +404,12 @@ function FeaturesSection() {
           { label: "Part Number", value: "BHI260AP" },
           { label: "Protocol", value: "SPI (SPI-0, CS-2)" },
         ],
+        image: imuSensingAxes,
+        imageAlt: "IMU Sensing Axes Orientation",
+        citation: {
+          text: "Image source: Bosch Sensortec BHI260AP Datasheet",
+          url: "https://www.bosch-sensortec.com/products/smart-sensor-systems/bhi260ap/",
+        },
       },
     },
     {
@@ -474,20 +497,48 @@ function FeaturesSection() {
               )}
 
               {selectedFeature.description.type === "specs" && (
-                <dl className="specs-list">
-                  {selectedFeature.description.content.map((spec, index) =>
-                    typeof spec === "string" ? (
-                      <p key={index} className="spec-note">
-                        {spec}
-                      </p>
-                    ) : (
-                      <div key={index} className="spec-item">
-                        <dt>{spec.label}:</dt>
-                        <dd>{spec.value}</dd>
-                      </div>
-                    )
+                <>
+                  <dl className="specs-list">
+                    {selectedFeature.description.content.map((spec, index) =>
+                      typeof spec === "string" ? (
+                        <p key={index} className="spec-note">
+                          {spec}
+                        </p>
+                      ) : (
+                        <div key={index} className="spec-item">
+                          <dt>{spec.label}:</dt>
+                          <dd>{spec.value}</dd>
+                        </div>
+                      )
+                    )}
+                  </dl>
+                  {selectedFeature.description.image && (
+                    <div className="feature-image-container">
+                      <img
+                        src={selectedFeature.description.image}
+                        alt={selectedFeature.description.imageAlt || "Feature diagram"}
+                        className="feature-image"
+                      />
+                      {selectedFeature.description.citation && (
+                        <p className="image-citation">
+                          <em>
+                            {selectedFeature.description.citation.url ? (
+                              <a
+                                href={selectedFeature.description.citation.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {selectedFeature.description.citation.text}
+                              </a>
+                            ) : (
+                              selectedFeature.description.citation.text
+                            )}
+                          </em>
+                        </p>
+                      )}
+                    </div>
                   )}
-                </dl>
+                </>
               )}
             </div>
           )}

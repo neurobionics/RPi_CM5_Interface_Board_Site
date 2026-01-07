@@ -986,6 +986,42 @@ em {
   display: block;
 }
 
+/* Feature Image Styling */
+.feature-image-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(133, 148, 232, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.feature-image {
+  max-width: 60%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.image-citation {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--osl-text-light);
+}
+
+.image-citation a {
+  color: var(--osl-vista-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.image-citation a:hover {
+  color: var(--osl-core-black);
+  text-decoration: underline;
+}
+
 /* Where to Buy Components Styling */
 .component-grid {
   display: grid;
