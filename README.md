@@ -33,9 +33,9 @@ The I/O pin diagrams are modeled in Onshape and labeled in a graphic design plat
 
    **Pin Color Palette:**
 
-   ![#FFD166](https://placehold.co/15x15/FFD166/FFD166.png) `#FFD166` &nbsp; ![#8594E8](https://placehold.co/15x15/8594E8/8594E8.png) `#8594E8` &nbsp; ![#9AD5D9](https://placehold.co/15x15/9AD5D9/9AD5D9.png) `#9AD5D9` &nbsp; ![#F2C6A0](https://placehold.co/15x15/F2C6A0/F2C6A0.png) `#F2C6A0` &nbsp; ![#F4978E](https://placehold.co/15x15/F4978E/F4978E.png) `#F4978E` &nbsp; ![#C2B7E3](https://placehold.co/15x15/C2B7E3/C2B7E3.png) `#C2B7E3` &nbsp; ![#BCE784](https://placehold.co/15x15/BCE784/BCE784.png) `#BCE784` &nbsp; ![#E7F15A](https://placehold.co/15x15/E7F15A/E7F15A.png) `#E7F15A`
+   ![#7E8496](https://placehold.co/15x15/7E8496/7E8496.png) `#7E8496` &nbsp; ![#8594E8](https://placehold.co/15x15/8594E8/8594E8.png) `#8594E8` &nbsp; ![#9AD5D9](https://placehold.co/15x15/9AD5D9/9AD5D9.png) `#9AD5D9` &nbsp; ![#C2B7E3](https://placehold.co/15x15/C2B7E3/C2B7E3.png) `#C2B7E3` &nbsp; ![#E7F15A](https://placehold.co/15x15/E7F15A/E7F15A.png) `#E7F15A` &nbsp; ![#FFD166](https://placehold.co/15x15/FFD166/FFD166.png) `#FFD166` &nbsp; ![#F4978E](https://placehold.co/15x15/F4978E/F4978E.png) `#F4978E` &nbsp; ![#BCE784](https://placehold.co/15x15/BCE784/BCE784.png) `#BCE784`
 
-   ![Pin coloring in Onshape](assets/io_pin_diagrams_adding_color.png)
+   ![Pin coloring in Onshape](src/assets/io_pin_diagrams_adding_color.png)
 
 3. Once all pins are colored, export the image as a `.png`.
 
