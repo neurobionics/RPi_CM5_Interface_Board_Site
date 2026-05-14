@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# RPi CM5 Interface Board Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌐 About the Site
 
-## Available Scripts
+This website is a digital pairing to the RPi CM5 Interface Board developed by Neurobionics, providing an interactive reference for its I/O pins and features. On the site you can find part numbers for connectors used on the board, mechanical diagrams, and datasheets from previous versions of the board. A PDF version of the datasheet is also available for download directly from the site.
 
-In the project directory, you can run:
+> [!NOTE]
+> When updating the site, always preserve previous PDF datasheets to maintain a historical archive of board iterations.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 How to Update the Website
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Interactive PCB
 
-### `npm test`
+1. **Generate renders:** Export the 3D model from KiCad's renderer with Orthographic View enabled. Export both front and back views of the board and label them: `pcb-front.png` and `pcb-back.png`.
+2. **Upload assets:** Place the new `pcb-front.png` and `pcb-back.png` into `src/assets/`, replacing the old files. Keep the filenames exactly the same.
+3. **Adjust markers:** Open `src/InteractivePCB.js`. Each component entry has two position fields:
+   - `position`: the `top` and `left` percentages for the dot marker
+   - `boxArea`: the `top`, `left`, `width`, and `height` percentages for the highlight box
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   Both are relative to the PCB image dimensions. Tweak these values until the markers realign with the new images.
 
-### `npm run build`
+4. **New components:** Add a new entry to the `frontComponents` or `backComponents` object in `src/InteractivePCB.js`, copying the format of an existing marker. If the new component has a pinout image, also add an `import` line for it at the top of `src/InteractivePCB.js`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### I/O Pin Diagrams
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The I/O pin diagrams are modeled in Onshape and labeled in a graphic design platform (e.g. Figma).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Modeling in Onshape:**
+1. Export your connector or header as a `.step` file and import it into Onshape.
+2. In Part Studio, orient the part to Top View, then open the Appearances Panel and assign a color to each pin surface, switching colors per pin.
 
-### `npm run eject`
+   **Pin Color Palette:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ![#FFD166](https://placehold.co/15x15/FFD166/FFD166.png) `#FFD166` &nbsp; ![#8594E8](https://placehold.co/15x15/8594E8/8594E8.png) `#8594E8` &nbsp; ![#9AD5D9](https://placehold.co/15x15/9AD5D9/9AD5D9.png) `#9AD5D9` &nbsp; ![#F2C6A0](https://placehold.co/15x15/F2C6A0/F2C6A0.png) `#F2C6A0` &nbsp; ![#F4978E](https://placehold.co/15x15/F4978E/F4978E.png) `#F4978E` &nbsp; ![#C2B7E3](https://placehold.co/15x15/C2B7E3/C2B7E3.png) `#C2B7E3` &nbsp; ![#BCE784](https://placehold.co/15x15/BCE784/BCE784.png) `#BCE784` &nbsp; ![#E7F15A](https://placehold.co/15x15/E7F15A/E7F15A.png) `#E7F15A`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ![Pin coloring in Onshape](assets/io_pin_diagrams_adding_color.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Once all pins are colored, export the image as a `.png`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Import the `.png` into your design tool and add labels using the label color palette below.
 
-## Learn More
+   **Label Color Palette:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ![#646876](https://placehold.co/15x15/646876/646876.png) `#646876` &nbsp; ![#6A76B6](https://placehold.co/15x15/6A76B6/6A76B6.png) `#6A76B6` &nbsp; ![#7FA8AC](https://placehold.co/15x15/7FA8AC/7FA8AC.png) `#7FA8AC` &nbsp; ![#A099B9](https://placehold.co/15x15/A099B9/A099B9.png) `#A099B9` &nbsp; ![#ABB151](https://placehold.co/15x15/ABB151/ABB151.png) `#ABB151` &nbsp; ![#C9A85B](https://placehold.co/15x15/C9A85B/C9A85B.png) `#C9A85B` &nbsp; ![#C38079](https://placehold.co/15x15/C38079/C38079.png) `#C38079` &nbsp; ![#9BB972](https://placehold.co/15x15/9BB972/9BB972.png) `#9BB972`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. Export the final diagram as a `.png` and place it in `src/assets/`, replacing the existing file. Keep the filename the same. If the filename changes, update the matching `import` at the top of `src/InteractivePCB.js`.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Mechanical Specifications
 
-### Analyzing the Bundle Size
+1. Export the full KiCad assembly as a `.step` file and import it into Onshape.
+2. Create a drawing with Top, Bottom, and Front views. ([3-minute tutorial](https://www.youtube.com/watch?v=b_E4fBLOqFw))
+3. Add dimensions for:
+   - Length and width
+   - Hole sizes
+   - IMU dimensions relative to the board
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   All labeling can be done directly in Onshape.
+4. Export the drawing as `mechanical_specs.png` and replace the existing file in `src/assets/`.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### PDF Datasheet
 
-### Advanced Configuration
+All datasheets are edited in Overleaf using LaTeX.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. The `latex` folder in this repo contains `main.tex` and all assets for the most recent datasheet version.
+2. Download the folder and import all files into a single Overleaf project.
+3. Update the technical specs, I/O pins, and mechanical details as needed.
+4. Export the finished PDF and add it to `src/assets/`. **Do not delete previous `.pdf` files.**
+5. In `src/App.js`, update the `datasheetPDF` import at the top of the file to point to your new PDF filename.
+6. Add a new row at the top of the `Archive` table in the `Archive()` function in `src/App.js`. Include the version number, release date, and a list of new features and changes/fixes.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Deploying Changes
 
-### `npm run build` fails to minify
+After making any edits to source files:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Commit and push to the `main` branch.
+2. GitHub Actions will automatically build the site and deploy it to GitHub Pages.

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './InteractivePCB.css';
-import pcbBackImage from './pcb-layout.png';
-import pcbFrontImage from './pcb-front.png';
-import i2c2_pinout from './I2C2_pinout.png';
-import i2c3_pinout from './I2C3_pinout.png';
-import uart1_pinout from './UART1_pinout.png';
-import uart2_pinout from './UART2_pinout.png';
-import spi_pinout from './SPI1_pinout.png';
-import can0_pinout from './CAN0_pinout.png';
-import GPIOheaders_pinout from './J6_pinout.png';
-import fan_pinout from './FAN_pinout.png';
-import rpiboot_pinout from './RPIBOOT_pinout.png';
+import pcbBackImage from './assets/pcb-back.png';
+import pcbFrontImage from './assets/pcb-front.png';
+import i2c2_pinout from './assets/I2C2_pinout.png';
+import i2c3_pinout from './assets/I2C3_pinout.png';
+import uart1_pinout from './assets/UART1_pinout.png';
+import uart2_pinout from './assets/UART2_pinout.png';
+import spi_pinout from './assets/SPI1_pinout.png';
+import can0_pinout from './assets/CAN0_pinout.png';
+import GPIOheaders_pinout from './assets/J6_pinout.png';
+import fan_pinout from './assets/FAN_pinout.png';
+import rpiboot_pinout from './assets/RPIBOOT_pinout.png';
 
 const InteractivePCB = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -21,22 +21,22 @@ const InteractivePCB = () => {
     'sd-card': {
       name: 'SD Card Slot',
       description: 'Micro SD card slot for flashing RPi',
-      position: { top: '68%', left: '14%' },
-      boxArea: { top: '49%', left: '2%', width: '25%', height: '34%' },
+      position: { top: '68%', left: '12%' },
+      boxArea: { top: '49%', left: '0%', width: '26%', height: '34%' },
       category: 'power'
     },
     'osl-website': {
       name: 'OSL Website',
       description: 'Links to the Open Source Leg website',
-      position: { top: '71%', left: '75%' },
-      boxArea: { top: '61%', left: '68%', width: '13.5%', height: '18.5%' },
+      position: { top: '65%', left: '71%' },
+      boxArea: { top: '55%', left: '63.5%', width: '14%', height: '18.5%' },
       category: 'power'
     },
     'cm5-connector': {
       name: 'RPI CM5 Receptacle',
       description: 'Connector for RPi CM5 module',
-      position: { top: '10%', left: '47%' },
-      boxArea: { top: '2%', left: '24.5%', width: '42%', height: '15%' },
+      position: { top: '8%', left: '47%' },
+      boxArea: { top: '0%', left: '24.5%', width: '42%', height: '15%' },
       category: 'main'
     }
   };
@@ -48,7 +48,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>I2C bus 2 with Molex Picoclasp connector</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -73,7 +73,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>I2C bus 3 with Molex Picoclasp connector</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -98,7 +98,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>SPI bus with SCLK, MISO, MOSI, and 3 chip select lines</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -114,8 +114,8 @@ const InteractivePCB = () => {
           </div>
         </>
       ),
-      position: { top: '9%', left: '76%' },
-      boxArea: { top: '0%', left: '66%', width: '20%', height: '15%' },
+      position: { top: '9%', left: '77%' },
+      boxArea: { top: '0%', left: '67%', width: '20%', height: '15%' },
       category: 'communication'
     },
     'uart1': {
@@ -123,7 +123,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>UART port 1 with Molex Picoclasp connector</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -148,7 +148,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>UART port 2 with Molex Picoclasp connector</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -173,7 +173,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>CAN0 interface for communication over the Controller Area Network bus</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -188,18 +188,43 @@ const InteractivePCB = () => {
             </div>
           </div>
         </>
-      ),      
+      ),
       position: { top: '26%', left: '37%' },
       boxArea: { top: '20%', left: '31%', width: '11%', height: '12%' },
+      category: 'communication'
+    },
+    'can1-module': {
+      name: 'CAN-1',
+      description: (
+        <>
+          <p>CAN1 interface for communication over the Controller Area Network bus</p>
+          <div
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(can0_pinout);
+            }}
+          >
+            <img src={can0_pinout} alt="CAN1 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '38%', left: '32.5%' },
+      boxArea: { top: '33%', left: '26.5%', width: '11%', height: '12%' },
       category: 'communication'
     },
 
     // PSU (Power Supply Units)
     'power-input': {
-      name: '15-60V Input',
-      description: 'XT30 connector for 15-60V input power from battery',
+      name: '15-53V Input',
+      description: 'XT30 connector for 15-53V input power from battery',
       position: { top: '34%', left: '91%' },
-      boxArea: { top: '18%', left: '73%', width: '26%', height: '31%' },
+      boxArea: { top: '18%', left: '74%', width: '26%', height: '31%' },
       category: 'psu'
     },
 
@@ -216,7 +241,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>Cooling fan connector (5V)</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -232,8 +257,8 @@ const InteractivePCB = () => {
           </div>
         </>
       ),
-      position: { top: '93%', left: '49%' },
-      boxArea: { top: '86%', left: '42%', width: '13.5%', height: '12%' },
+      position: { top: '94%', left: '49%' },
+      boxArea: { top: '87%', left: '42%', width: '13.5%', height: '12%' },
       category: 'features'
     },
     'test-pad': {
@@ -248,7 +273,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>Boot mode jumper for flashing CM5 via USB (eMMC mode)</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -264,22 +289,22 @@ const InteractivePCB = () => {
           </div>
         </>
       ),
-      position: { top: '91%', left: '83.5%' },
-      boxArea: { top: '83%', left: '80%', width: '7%', height: '16%' },
+      position: { top: '92%', left: '84.5%' },
+      boxArea: { top: '84%', left: '81%', width: '7%', height: '16%' },
       category: 'features'
     },
     'rpi-power-button': {
       name: 'RPi Power Button',
       description: 'Power on/off toggle switch for safe RPi shutdown',
-      position: { top: '92%', left: '63%' },
-      boxArea: { top: '85.5%', left: '56%', width: '14%', height: '12%' },
+      position: { top: '93%', left: '63.5%' },
+      boxArea: { top: '87%', left: '56%', width: '14%', height: '12%' },
       category: 'features'
     },
     'external-switch': {
       name: 'External Switch for RPi Power Button',
       description: 'Port to connect an external switch to the RPi Power Button',
-      position: { top: '92%', left: '75%' },
-      boxArea: { top: '85.5%', left: '70%', width: '10%', height: '11.5%' },
+      position: { top: '93%', left: '76%' },
+      boxArea: { top: '87%', left: '71%', width: '10%', height: '11.5%' },
       category: 'features'
     },
     'gpio-headers': {
@@ -287,7 +312,7 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>6x GPIO header for prototyping and signal breakout</p>
-          <div 
+          <div
             className="component-pinout"
             onClick={(e) => {
               e.stopPropagation();
@@ -303,8 +328,8 @@ const InteractivePCB = () => {
           </div>
         </>
       ),
-      position: { top: '9%', left: '24%' },
-      boxArea: { top: '1%', left: '14%', width: '20%', height: '15%' },
+      position: { top: '9%', left: '23.5%' },
+      boxArea: { top: '1%', left: '13%', width: '20%', height: '15%' },
       category: 'features'
     },
 
@@ -312,15 +337,15 @@ const InteractivePCB = () => {
     'imu': {
       name: 'IMU',
       description: 'Inertial Measurement Unit for motion and orientation sensing',
-      position: { top: '59.5%', left: '59%' },
-      boxArea: { top: '53%', left: '54.5%', width: '8%', height: '12%' },
+      position: { top: '40%', left: '55%' },
+      boxArea: { top: '34%', left: '50%', width: '8%', height: '12%' },
       category: 'components'
     },
     'usb-c': {
       name: 'USB-C Port',
       description: 'USB-C data ports for high-speed data transfer between devices',
       position: { top: '30%', left: '10%' },
-      boxArea: { top: '18%', left: '1%', width: '16%', height: '58%' },
+      boxArea: { top: '18%', left: '0%', width: '16%', height: '58%' },
       category: 'components'
     }
   };

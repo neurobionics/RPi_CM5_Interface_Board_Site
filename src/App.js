@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import InteractivePCB from "./InteractivePCB";
-import mechanicalSpecs from "./mechanical_specs.png";
-import imuSensingAxes from "./IMU_sensing_axes.png";
-import datasheetPDF from "./RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf";
+import mechanicalSpecs from "./assets/mechanical_specs.png";
+import imuSensingAxes from "./assets/IMU_sensing_axes.png";
+import datasheetPDF from "./assets/RPi_CM5_interface_board_v.1.1.0_ Datasheet.pdf";
+import datasheetV100PDF from "./assets/RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf";
 // import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
 
 function App() {
@@ -103,7 +104,7 @@ function SystemOverview() {
   return (
     <section className="section osl-card" id="system-overview">
       <h2>Interactive PCB Layout</h2>
-      <p className="pcb-version">v1.0.0</p>
+      <p className="pcb-version">v1.1.0</p>
       <p>
         Click on the individual components to learn more their functionality:
       </p>
@@ -150,8 +151,8 @@ function PowerSection() {
                 <td>
                   <strong>XT30</strong>
                 </td>
-                <td>15 - 60</td>
-                <td>30.2</td>
+                <td>15 - 53</td>
+                <td>26.67</td>
               </tr>
               <tr>
                 <td>
@@ -265,9 +266,9 @@ function IOPinsSection() {
               </tr>
               <tr>
                 <td>
-                  <strong>CAN-1</strong>
+                  <strong>CAN-0,1</strong>
                 </td>
-                <td>CAN-0 (on SPI-0, CS0)</td>
+                <td>CAN-0, CAN-1 (on SPI-0, CS0)</td>
                 <td>Molex PicoClasp, 3-Pin</td>
                 <td>
                   <a
@@ -389,7 +390,7 @@ function FeaturesSection() {
         type: "specs",
         content: [
           { label: "Part Number", value: "WS2812B-2020" },
-          { label: "Protocol", value: "Single-wire SPI (GPIO 2)" },
+          { label: "Protocol", value: "Single-wire SPI (GPIO 14)" },
           { label: "Example Implementation", value: "[insert link here]" },
         ],
       },
@@ -402,7 +403,7 @@ function FeaturesSection() {
         type: "specs",
         content: [
           { label: "Part Number", value: "BHI260AP" },
-          { label: "Protocol", value: "SPI (SPI-0, CS-2)" },
+          { label: "Protocol", value: "SPI (SPI-0, CS-1)" },
         ],
         image: imuSensingAxes,
         imageAlt: "IMU Sensing Axes Orientation",
@@ -418,7 +419,7 @@ function FeaturesSection() {
       icon: "💾",
       description: {
         type: "simple",
-        content: 'To be used with CM5 "lite" module (without onboard storage)',
+        content: 'To be used with CM5 "lite" module (version of CM5 without onboard storage)',
       },
     },
     {
@@ -753,23 +754,36 @@ function Archive() {
                 <td>
                   <strong>v1.1.0</strong>
                 </td>
-                <td>December 2025</td>
+                <td>May 2026</td>
                 <td>
                   <div className="changelog-content">
                     <strong>New Features:</strong>
                     <ul>
-                      <li>Added CAN bus support</li>
+                      <li>Added 2nd CAN bus</li>
                       <li>RGB LED now enabled</li>
                       <li>RTC pulled up to remain on when Pi is powered off</li>
+                      <li>ESD protection diodes on all USB-C data and power lines</li>
+                      <li>TVS diode for surge current protection on XT30 input</li>
                     </ul>
                     <strong>Changes:</strong>
                     <ul>
                       <li>Modified I2C port configuration</li>
+                      <li>Modified IMU location on board</li>
                     </ul>
                   </div>
                 </td>
                 <td>
-                  <span className="coming-soon">Coming Soon</span>
+                  <button
+                    className="download-button"
+                    onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_v1.1.0_Datasheet.pdf')}
+                  >
+                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Datasheet
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -800,7 +814,7 @@ function Archive() {
                 <td>
                   <button
                     className="download-button"
-                    onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_Datasheet.pdf')}
+                    onClick={() => handleDownload(datasheetV100PDF, 'RPi_CM5_Interface_Board_v1.0.0_Datasheet.pdf')}
                   >
                     <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
