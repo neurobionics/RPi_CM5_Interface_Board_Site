@@ -3,10 +3,17 @@ import "./App.css";
 import InteractivePCB from "./InteractivePCB";
 import mechanicalSpecs from "./assets/mechanical_specs.png";
 import imuSensingAxes from "./assets/IMU_sensing_axes.png";
-import datasheetPDF from "./assets/v1.1.1.pdf";
-import datasheetV110PDF from "./assets/v1.1.0.pdf";
-import datasheetV100PDF from "./assets/v1.0.0.pdf";
-// import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
+import datasheet, { datasheetPdfAssets } from "./generated/datasheet";
+
+const featureImages = {
+  "IMU_sensing_axes.png": imuSensingAxes,
+};
+
+const datasheetFileName = (version) => `v${version}.pdf`;
+
+const formatVoltage = (voltage) => (
+  voltage.max ? `${voltage.min} - ${voltage.max}` : `${voltage.value}`
+);
 
 function App() {
   return (
@@ -63,17 +70,14 @@ function About() {
   return (
     <section className="section osl-card" id="about">
       <h2>About</h2>
-      <p>
-        The Interface Board is an add-on module for the Raspberry Pi Compute
-        Module 5 (RPi CM5) that is designed to provide plug and play
-        functionality for sensors and actuators across a wide variety of
-        robotics applications. It is built and tested by researchers at the
-        University of Michigan's Neurobionics Lab.
-      </p>
+      <p>{datasheet.overview}</p>
       <div className="download-buttons-container">
         <button
           className="download-button"
-          onClick={() => handleDownload(datasheetPDF, 'v1.1.1.pdf')}
+          onClick={() => handleDownload(
+            datasheetPdfAssets[datasheet.currentVersion],
+            datasheetFileName(datasheet.currentVersion)
+          )}
         >
           <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -105,7 +109,7 @@ function SystemOverview() {
   return (
     <section className="section osl-card" id="system-overview">
       <h2>Interactive PCB Layout</h2>
-      <p className="pcb-version">v1.1.1</p>
+      <p className="pcb-version">v{datasheet.currentVersion}</p>
       <p>
         Click on the individual components to learn more their functionality:
       </p>
@@ -145,44 +149,32 @@ function PowerSection() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <strong>J1</strong>
-                </td>
-                <td>
-                  <strong>XT30</strong>
-                </td>
-                <td>15 - 48</td>
-                <td>26.67</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>
-                    J2<sup style={{ fontSize: "0.8em" }}>*</sup>
-                  </strong>
-                </td>
-                <td>
-                  <strong>USB-C</strong>
-                </td>
-                <td>5</td>
-                <td>26.5</td>
-              </tr>
+              {datasheet.power.inputs.map((input) => (
+                <tr key={input.designator}>
+                  <td>
+                    <strong>
+                      {input.designator}
+                      {input.footnoteMarker && <sup style={{ fontSize: "0.8em" }}>*</sup>}
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>{input.connector}</strong>
+                  </td>
+                  <td>{formatVoltage(input.voltage)}</td>
+                  <td>{input.power}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
 
           <div
             style={{ marginTop: "0.5em", fontStyle: "italic", color: "#666" }}
           >
-            *Do not use J7 or J8 USB-C ports for power input. These are for high
-            speed data transfer only.
+            *{datasheet.power.inputNote}
           </div>
 
           <h3>Output</h3>
-          <p>
-            {" "}
-            The peripheral connectors can provide a combined power output of 1 W
-            at 3.3 V.
-          </p>
+          <p>{datasheet.power.outputDescription}</p>
         </>
       )}
     </section>
@@ -217,122 +209,32 @@ function IOPinsSection() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <strong>I2C-2,3</strong>
-                </td>
-                <td>I2C-2, I2C-3</td>
-                <td>Molex PicoClasp, 4-Pin</td>
-                <td>
-                  <a
-                    href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    5013300400
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>SPI-1</strong>
-                </td>
-                <td>SPI-1 (CS0, CS1, CS2)</td>
-                <td>Molex PicoClasp, 8-Pin</td>
-                <td>
-                  <a
-                    href="https://www.digikey.com/en/products/detail/molex/5013300800/1531505"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    5013300800
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>UART-1,2</strong>
-                </td>
-                <td>UART-1, UART-2</td>
-                <td>Molex PicoClasp, 4-Pin</td>
-                <td>
-                  <a
-                    href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    5013300400
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>CAN-0,1</strong>
-                </td>
-                <td>CAN-0, CAN-1 (on SPI-0, CS0)</td>
-                <td>Molex PicoClasp, 3-Pin</td>
-                <td>
-                  <a
-                    href="https://www.digikey.com/en/products/detail/molex/5013300300/1531500"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    5013300300
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>FAN-1</strong>
-                </td>
-                <td>Fan PWM, Fan Tacho</td>
-                <td>JST PH 4-pin</td>
-                <td>
-                  <a
-                    href="https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    SHR-04V-S-B
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>J6</strong>
-                </td>
-                <td>GPIO 7, 22, 23, 24, 25, 27</td>
-                <td>Header Pins, 8-Pin, 2.54 mm pitch</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>J4</strong>
-                </td>
-                <td>For connecting external switch to RPi safe shutdown button</td>
-                <td>Molex PicoClasp, 2-Pin</td>
-                <td>
-                  <a
-                    href="https://www.tti.com/content/ttiinc/en/apps/part-detail.html?partsNumber=501331-0207&mfgShortname=MOL&utm=PNC2024&utm_term=501331-0207&gad_source=1&gad_campaignid=20878198023&gbraid=0AAAAADvyBAYlpdIrj3_VoOWbBV_LyPuHd&gclid=Cj0KCQiA6sjKBhCSARIsAJvYcpMLo20pU-iWSczj1KusdGSWY9HvQXdKQFdEqWIc83ize24FGx2gIfYaAv39EALw_wcB"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    501331-0207
-                  </a>
-                </td>
-              </tr>
+              {datasheet.ioPins.map((pin) => (
+                <tr key={pin.designator}>
+                  <td><strong>{pin.designator}</strong></td>
+                  <td>{pin.busDetails}</td>
+                  <td>{pin.connector}</td>
+                  <td>
+                    {pin.partNumber && (
+                      <a href={pin.partUrl} target="_blank" rel="noopener noreferrer">
+                        {pin.partNumber}
+                      </a>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
 
           <p className="io-note">
-            <strong>Note:</strong> Pins can be remapped using RPi Device Tree
-            Overlays in <code>/boot/firmware/config.txt</code>. For more
-            details, refer to this{" "}
+            <strong>Note:</strong> {datasheet.ioPinsNote}{" "}
+            <code>{datasheet.ioPinsNotePath}</code>. {datasheet.ioPinsNoteAfterPath}{" "}
             <a
-              href="https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README"
+              href={datasheet.ioPinsNoteUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              this link
+              link
             </a>
             .
           </p>
@@ -353,99 +255,10 @@ function FeaturesSection() {
     }
   };
 
-  const features = [
-    {
-      id: "shutdown",
-      title: "Safe RPi Shutdown",
-      icon: "⚡",
-      description: {
-        type: "simple",
-        content: "Pushbutton to safely shutdown and power on the Pi",
-      },
-    },
-    {
-      id: "status-leds",
-      title: "Status LEDs",
-      icon: "💡",
-      description: {
-        type: "list",
-        content: [
-          { label: "5V", desc: "Indicates power on the 5V rail" },
-          { label: "3V3", desc: "Indicates power on the 3.3V rail" },
-          {
-            label: "PWR",
-            desc: "The CM5 is receiving sufficient power and is turned on",
-          },
-          {
-            label: "ACT",
-            desc: "The flashing green light indicates the CM5 is running and/or accessing the OS",
-          },
-        ],
-      },
-    },
-    {
-      id: "rgb-led",
-      title: "Programmable RGB LED",
-      icon: "🌈",
-      description: {
-        type: "specs",
-        content: [
-          { label: "Part Number", value: "WS2812B-2020" },
-          { label: "Protocol", value: "Single-wire SPI (GPIO 14)" },
-          { label: "Example Implementation", value: "[insert link here]" },
-        ],
-      },
-    },
-    {
-      id: "imu",
-      title: "IMU",
-      icon: "🔄",
-      description: {
-        type: "specs",
-        content: [
-          { label: "Part Number", value: "BHI260AP" },
-          { label: "Protocol", value: "SPI (SPI-0, CS-1)" },
-        ],
-        image: imuSensingAxes,
-        imageAlt: "IMU Sensing Axes Orientation",
-        citation: {
-          text: "Image source: Bosch Sensortec BHI260AP Datasheet",
-          url: "https://www.bosch-sensortec.com/products/smart-sensor-systems/bhi260ap/",
-        },
-      },
-    },
-    {
-      id: "sd-card",
-      title: "SD Card Slot",
-      icon: "💾",
-      description: {
-        type: "simple",
-        content: 'To be used with CM5 "lite" module (version of CM5 without onboard storage)',
-      },
-    },
-    {
-      id: "rtc",
-      title: "Real-Time Clock",
-      icon: "🕒",
-      description: {
-        type: "simple",
-        content: "Enables RTC on-board the RPi CM5.",
-      },
-    },
-    {
-      id: "tp",
-      title: "Test Points",
-      icon: "🧪",
-      description: {
-        type: "specs",
-        content: [
-          "Use the GND pin on J3 when measuring voltages",
-          { label: "TP1", value: "3.3V rail" },
-          { label: "TP2", value: "5V rail" },
-        ],
-      },
-    },
-  ];
+  const features = datasheet.features.map((feature) => ({
+    ...feature,
+    image: feature.imageAsset ? featureImages[feature.imageAsset] : undefined,
+  }));
 
   return (
     <section className="section osl-card" id="features">
@@ -713,6 +526,12 @@ function HardwareRecommendations() {
 function Archive() {
   const [expanded, setExpanded] = useState(false);
 
+  const changeGroups = [
+    ["newFeatures", "New Features"],
+    ["changes", "Changes"],
+    ["fixes", "Fixes"],
+  ];
+
   const handleDownload = (pdfUrl, fileName) => {
     // Create a link element and trigger download
     const link = document.createElement('a');
@@ -751,108 +570,40 @@ function Archive() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <strong>v1.1.1</strong>
-                </td>
-                <td>August 2026</td>
-                <td>
-                  <div className="changelog-content">
-                    <strong>Changes:</strong>
-                    <ul>
-                      <li>Power supply layout improvements</li>
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    className="download-button"
-                    onClick={() => handleDownload(datasheetPDF, 'v1.1.1.pdf')}
-                  >
-                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download Datasheet
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>v1.1.0</strong>
-                </td>
-                <td>May 2026</td>
-                <td>
-                  <div className="changelog-content">
-                    <strong>New Features:</strong>
-                    <ul>
-                      <li>Added 2nd CAN bus</li>
-                      <li>RGB LED now enabled</li>
-                      <li>RTC pulled up to remain on when Pi is powered off</li>
-                      <li>ESD protection diodes on all USB-C data and power lines</li>
-                      <li>TVS diode for surge current protection on XT30 input</li>
-                    </ul>
-                    <strong>Changes:</strong>
-                    <ul>
-                      <li>Modified I2C port configuration</li>
-                      <li>Modified IMU location on board</li>
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    className="download-button"
-                    onClick={() => handleDownload(datasheetV110PDF, 'v1.1.0.pdf')}
-                  >
-                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download Datasheet
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>v1.0.0</strong>
-                </td>
-                <td>October 2025</td>
-                <td>
-                  <div className="changelog-content">
-                    <strong>New Features:</strong>
-                    <ul>
-                      <li>Programmable RGB LED port</li>
-                      <li>IMU integration</li>
-                      <li>Multiple SPI chip selects</li>
-                      <li>GPIO pin breakouts</li>
-                      <li>New OSL symbol</li>
-                    </ul>
-                    <strong>Fixes:</strong>
-                    <ul>
-                      <li>Reduced LED brightness</li>
-                      <li>SD card functionality restored</li>
-                      <li>Improved thermal management</li>
-                      <li>Added flipped USB-C support</li>
-                      <li>3.3V line enable</li>
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                  <button
-                    className="download-button"
-                    onClick={() => handleDownload(datasheetV100PDF, 'v1.0.0.pdf')}
-                  >
-                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download Datasheet
-                  </button>
-                </td>
-              </tr>
+              {datasheet.releases.map((release) => (
+                <tr key={release.version}>
+                  <td><strong>v{release.version}</strong></td>
+                  <td>{release.releaseDate}</td>
+                  <td>
+                    <div className="changelog-content">
+                      {changeGroups.map(([key, label]) => release[key]?.length > 0 && (
+                        <React.Fragment key={key}>
+                          <strong>{label}:</strong>
+                          <ul>
+                            {release[key].map((change) => <li key={change}>{change}</li>)}
+                          </ul>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </td>
+                  <td>
+                    <button
+                      className="download-button"
+                      onClick={() => handleDownload(
+                        datasheetPdfAssets[release.version],
+                        datasheetFileName(release.version)
+                      )}
+                    >
+                      <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                      </svg>
+                      Download Datasheet
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </>

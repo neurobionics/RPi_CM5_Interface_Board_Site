@@ -16,6 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "datasheet:generate": "node scripts/generate-datasheet.mjs",
+    "datasheet:setup": "node scripts/ensure-latex-packages.mjs",
+    "datasheet:build": "npm run datasheet:generate && npm run datasheet:setup && node scripts/build-datasheet.mjs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

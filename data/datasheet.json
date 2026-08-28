@@ -1,0 +1,298 @@
+{
+  "currentVersion": "1.1.1",
+  "overview": "The RPi CM5 Interface Board is an add-on module for the Raspberry Pi Compute Module 5 (RPi CM5) that is designed to provide plug and play functionality for sensors and actuators across a wide variety of robotics applications. It is built and tested by researchers at the University of Michigan's Neurobionics Lab.",
+  "releases": [
+    {
+      "version": "1.1.1",
+      "releaseDate": "August 2026",
+      "changes": [
+        "Power supply layout improvements"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "releaseDate": "May 2026",
+      "newFeatures": [
+        "Added 2nd CAN bus",
+        "RGB LED now enabled",
+        "RTC pulled up to remain on when Pi is powered off",
+        "ESD protection diodes on all USB-C data and power lines",
+        "TVS diode for surge current protection on XT30 input"
+      ],
+      "changes": [
+        "Modified I2C port configuration",
+        "Modified IMU location on board"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "releaseDate": "October 2025",
+      "newFeatures": [
+        "Programmable RGB LED port",
+        "IMU integration",
+        "Multiple SPI chip selects",
+        "GPIO pin breakouts",
+        "New OSL symbol"
+      ],
+      "fixes": [
+        "Reduced LED brightness",
+        "SD card functionality restored",
+        "Improved thermal management",
+        "Added flipped USB-C support",
+        "3.3V line enable"
+      ]
+    }
+  ],
+  "power": {
+    "inputs": [
+      {
+        "designator": "J1",
+        "connector": "XT30",
+        "voltage": { "min": 15, "max": 48, "unit": "V" },
+        "power": "26.67"
+      },
+      {
+        "designator": "J2",
+        "connector": "USB-C",
+        "voltage": { "value": 5, "unit": "V" },
+        "power": "26.5",
+        "footnoteMarker": true
+      }
+    ],
+    "outputs": [
+      { "voltage": "5", "current": "5", "type": "SMPS" },
+      { "voltage": "3.3", "current": "1", "type": "LDO" }
+    ],
+    "inputNote": "Do not use J7 or J8 USB-C ports for power input. These are for high speed data transfer only.",
+    "outputDescription": "The peripheral connectors can provide a combined power output of 1 W at 3.3 V."
+  },
+  "technicalSpecifications": [
+    {
+      "category": "Module Support",
+      "value": "Raspberry Pi Compute Module 5 (CM5) / CM5 Lite"
+    },
+    {
+      "category": "USB Interface",
+      "value": "2x USB-C 3.0 (High-Speed Communication)"
+    },
+    {
+      "category": "CAN Bus",
+      "value": "2x CAN Bus (MCP2515 Controller + MCP2562 Transceiver)"
+    },
+    {
+      "category": "Sensors",
+      "value": "Bosch BHI260AP (6-Axis IMU) on SPI0 chip select 1"
+    },
+    {
+      "category": "Storage",
+      "value": "MicroSD Card Slot (for CM5 Lite boot/storage)"
+    },
+    {
+      "category": "Cooling",
+      "value": "4-Pin Fan Connector (PWM Control + Tachometer)"
+    },
+    {
+      "category": "Dimensions",
+      "value": "55.00 mm x 40.00 mm x 14.09 mm"
+    }
+  ],
+  "ioPins": [
+    {
+      "designator": "I2C-2,3",
+      "busDetails": "I2C-2, I2C-3",
+      "connector": "Molex PicoClasp, 4-Pin",
+      "partNumber": "5013300400",
+      "partUrl": "https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
+    },
+    {
+      "designator": "SPI-1",
+      "busDetails": "SPI-1 (CS0, CS1, CS2)",
+      "connector": "Molex PicoClasp, 8-Pin",
+      "partNumber": "5013300800",
+      "partUrl": "https://www.digikey.com/en/products/detail/molex/5013300800/1531505"
+    },
+    {
+      "designator": "UART-1,2",
+      "busDetails": "UART-1, UART-2",
+      "connector": "Molex PicoClasp, 4-Pin",
+      "partNumber": "5013300400",
+      "partUrl": "https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
+    },
+    {
+      "designator": "CAN-0,1",
+      "busDetails": "CAN-0, CAN-1 (on SPI-0, CS0)",
+      "connector": "Molex PicoClasp, 3-Pin",
+      "partNumber": "5013300300",
+      "partUrl": "https://www.digikey.com/en/products/detail/molex/5013300300/1531500"
+    },
+    {
+      "designator": "FAN-1",
+      "busDetails": "Fan PWM, Fan Tacho",
+      "connector": "JST PH 4-pin",
+      "partNumber": "SHR-04V-S-B",
+      "partUrl": "https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868"
+    },
+    {
+      "designator": "J6",
+      "busDetails": "GPIO 7, 22, 23, 24, 25, 27",
+      "connector": "Header Pins, 8-Pin, 2.54 mm pitch"
+    },
+    {
+      "designator": "J4",
+      "busDetails": "For connecting external switch to RPi safe shutdown button",
+      "connector": "Molex PicoClasp, 2-Pin",
+      "partNumber": "501331-0207",
+      "partUrl": "https://www.tti.com/content/ttiinc/en/apps/part-detail.html?partsNumber=501331-0207&mfgShortname=MOL&utm=PNC2024&utm_term=501331-0207&gad_source=1&gad_campaignid=20878198023&gbraid=0AAAAADvyBAYlpdIrj3_VoOWbBV_LyPuHd&gclid=Cj0KCQiA6sjKBhCSARIsAJvYcpMLo20pU-iWSczj1KusdGSWY9HvQXdKQFdEqWIc83ize24FGx2gIfYaAv39EALw_wcB"
+    }
+  ],
+  "ioPinsNote": "Pins can be remapped using RPi Device Tree Overlays in",
+  "ioPinsNotePath": "/boot/firmware/config.txt",
+  "ioPinsNoteAfterPath": "For more details, refer to this",
+  "ioPinsNoteUrl": "https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README",
+  "features": [
+    {
+      "id": "shutdown",
+      "title": "Safe RPi Shutdown",
+      "icon": "⚡",
+      "description": {
+        "type": "simple",
+        "content": "Pushbutton to safely shutdown and power on the Pi"
+      }
+    },
+    {
+      "id": "status-leds",
+      "title": "Status LEDs",
+      "icon": "💡",
+      "description": {
+        "type": "list",
+        "content": [
+          { "label": "5V", "desc": "Indicates power on the 5V rail" },
+          { "label": "3V3", "desc": "Indicates power on the 3.3V rail" },
+          { "label": "PWR", "desc": "The CM5 is receiving sufficient power and is turned on" },
+          { "label": "ACT", "desc": "The flashing green light indicates the CM5 is running and/or accessing the OS" }
+        ]
+      }
+    },
+    {
+      "id": "rgb-led",
+      "title": "Programmable RGB LED",
+      "icon": "🌈",
+      "description": {
+        "type": "specs",
+        "content": [
+          { "label": "Part Number", "value": "WS2812B-2020" },
+          { "label": "Protocol", "value": "Single-wire SPI (GPIO 14)" },
+          { "label": "Example Implementation", "value": "[insert link here]" }
+        ]
+      }
+    },
+    {
+      "id": "imu",
+      "title": "IMU",
+      "datasheetTitle": "IMU (Bosch BHI260AP)",
+      "icon": "🔄",
+      "imageAsset": "IMU_sensing_axes.png",
+      "imageAlt": "IMU Sensing Axes Orientation",
+      "citation": {
+        "text": "Image source: Bosch Sensortec BHI260AP Datasheet",
+        "url": "https://www.bosch-sensortec.com/products/smart-sensor-systems/bhi260ap/"
+      },
+      "description": {
+        "type": "specs",
+        "content": [
+          { "label": "Part Number", "value": "BHI260AP" },
+          { "label": "Protocol", "value": "SPI (SPI-0, CS-1)" }
+        ]
+      }
+    },
+    {
+      "id": "sd-card",
+      "title": "SD Card Slot",
+      "icon": "💾",
+      "description": {
+        "type": "simple",
+        "content": "To be used with CM5 \"lite\" module (version of CM5 without onboard storage)"
+      }
+    },
+    {
+      "id": "rtc",
+      "title": "Real-Time Clock",
+      "icon": "🕒",
+      "description": {
+        "type": "simple",
+        "content": "Enables RTC on-board the RPi CM5."
+      }
+    },
+    {
+      "id": "tp",
+      "title": "Test Points",
+      "icon": "🧪",
+      "description": {
+        "type": "specs",
+        "content": [
+          "Use the GND pin on J3 when measuring voltages",
+          { "label": "TP1", "value": "3.3V rail" },
+          { "label": "TP2", "value": "5V rail" }
+        ]
+      }
+    }
+  ],
+  "pinouts": [
+    {
+      "title": "UART-1 (Molex PicoClasp, 4-Pin)",
+      "imageAsset": "4pin_pico.png",
+      "pins": [["1", "+3.3V"], ["2", "UART1_TX"], ["3", "UART1_RX"], ["4", "GND"]]
+    },
+    {
+      "title": "UART-2 (Molex PicoClasp, 4-Pin)",
+      "imageAsset": "4pin_pico.png",
+      "pins": [["1", "+3.3V"], ["2", "UART2_TX"], ["3", "UART2_RX"], ["4", "GND"]]
+    },
+    {
+      "title": "I2C-2 (Molex PicoClasp, 4-Pin)",
+      "imageAsset": "4pin_pico.png",
+      "pins": [["1", "+3.3V"], ["2", "I2C2_SDA"], ["3", "I2C2_SCL"], ["4", "GND"]]
+    },
+    {
+      "title": "I2C-3 (Molex PicoClasp, 4-Pin)",
+      "imageAsset": "4pin_pico.png",
+      "pins": [["1", "+3.3V"], ["2", "I2C3_SDA"], ["3", "I2C3_SCL"], ["4", "GND"]]
+    },
+    {
+      "title": "SPI-1 (Molex PicoClasp, 8-Pin)",
+      "imageAsset": "8pin_pico.png",
+      "pins": [["1", "+3.3V"], ["2", "SPI1_CSn2"], ["3", "SPI1_CSn1"], ["4", "SPI1_CSn0"], ["5", "SPI1_SCLK"], ["6", "SPI1_MISO"], ["7", "SPI1_MOSI"], ["8", "GND"]]
+    },
+    {
+      "title": "CAN-0/1 (Molex PicoClasp), 3-Pin)",
+      "imageAsset": "3pin_pico.png",
+      "pins": [["1", "GND"], ["2", "CAN_P"], ["3", "CAN_N"]]
+    },
+    {
+      "title": "GPIO HEADERS",
+      "imageAsset": "pinheader_number.png",
+      "pins": [["1", "GPIO_25"], ["2", "GPIO_23"], ["3", "GPIO_7"], ["4", "+3.3V"], ["5", "GPIO_27"], ["6", "GPIO_24"], ["7", "GPIO_22"], ["8", "GND"]]
+    },
+    {
+      "title": "Fan Port, JST 4-Pin Connector",
+      "imageAsset": "fanport_numbering.png",
+      "pins": [["1", "Tachometer"], ["2", "GND"], ["3", "PWM"], ["4", "+5V"]]
+    }
+  ],
+  "mechanical": {
+    "lengthMm": "55",
+    "widthMm": "40",
+    "mountingHoles": "4 x 2.7 mm (Standard M2.5)",
+    "maxHeightMm": "14.09",
+    "maxHeightDescription": "Top of USB-C connector to bottom pins"
+  },
+  "otherComponents": [
+    { "label": "Signal LEDs", "description": "5V, 3.3V, Power, and Activity" },
+    { "label": "Programmable RGB LED", "description": "Addressable RGB LED for user feedback and debugging" },
+    { "label": "J4 External Switch", "description": "Can be used for safe RPi shutdown with an external switch using a Molex PicoClasp 2-pin connector" },
+    { "label": "Safe Shutdown Circuit", "description": "Allows clean shutdown of the Raspberry Pi without power corruption" },
+    { "label": "Real-Time Clock (RTC)", "description": "Maintains system time when RPi is off (only interface board is powered)." },
+    { "label": "Test Points", "description": "Labeled test points for power rails and key signals to assist debugging" },
+    { "label": "Boot Configuration Access", "description": "Hardware support for CM5 boot and bring-up workflows" }
+  ]
+}

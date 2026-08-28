@@ -2,7 +2,7 @@
 
 ## 🌐 About the Site
 
-This website is a digital pairing to the RPi CM5 Interface Board developed by Neurobionics, providing an interactive reference for its I/O pins and features. On the site you can find part numbers for connectors used on the board, mechanical diagrams, and datasheets from previous versions of the board. A PDF version of the datasheet is also available for download directly from the site.
+This website is an interactive datasheet for the RPi CM5 Interface Board developed by the Neurobionics lab.
 
 > [!NOTE]
 > When updating the site, always preserve previous PDF datasheets to maintain a historical archive of board iterations.
@@ -65,14 +65,40 @@ The I/O pin diagrams are modeled in Onshape and labeled in a graphic design plat
 
 ### PDF Datasheet
 
-All datasheets are edited in Overleaf using LaTeX.
+Board parameters, features, version history, and changelog entries are maintained in [`data/datasheet.json`](data/datasheet.json). Do not edit generated data files, `src/App.js`, or `latex/generated/datasheet.tex` to update these values.
 
-1. The `latex` folder in this repo contains `main.tex` and all assets for the most recent datasheet version.
-2. Download the folder and import all files into a single Overleaf project.
-3. Update the technical specs, I/O pins, and mechanical details as needed.
-4. Export the finished PDF and add it to `src/assets/`. **Do not delete previous `.pdf` files.**
-5. In `src/App.js`, update the `datasheetPDF` import at the top of the file to point to your new PDF filename.
-6. Add a new row at the top of the `Archive` table in the `Archive()` function in `src/App.js`. Include the version number, release date, and a list of new features and changes/fixes.
+#### Automated local LaTeX workflow
+
+The automated datasheet build requires a local LaTeX installation. Use one of these distributions for your operating system:
+
+- macOS: BasicTeX, MacTeX, or TeX Live. BasicTeX is sufficient; ensure `/Library/TeX/texbin` is on `PATH`.
+- Windows: TeX Live is recommended for the automated workflow because it provides `tlmgr`; MiKTeX can be used for manual compilation. Add the LaTeX installation directory to `PATH`.
+- Linux: TeX Live. For Debian or Ubuntu, install the required tools with `sudo apt install texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra`; add `texlive-lang-english` if needed.
+
+The build verifies that `pdflatex`, `tlmgr`, and `kpsewhich` are available and installs missing LaTeX packages through `tlmgr`. From the repository root, run:
+
+```bash
+npm run datasheet:build
+npm run build
+```
+
+`datasheet:build` validates the data, installs the LaTeX packages used by `latex/main.tex` through `tlmgr`, generates the React and LaTeX data, compiles `latex/main.tex` with `pdflatex`, and copies the result to `src/assets/v<version>.pdf`. Previous PDF files are preserved. PDF filenames are derived from the version and must not be added to the JSON file.
+
+If LaTeX is not installed locally, use the manual Overleaf workflow below instead.
+
+The generated LaTeX build files are written to `latex/.build/`, which is ignored by Git.
+
+#### Manual Overleaf workflow
+
+1. Edit `data/datasheet.json` locally.
+2. Run `npm run datasheet:generate` to update the generated React and LaTeX data.
+3. Upload the complete `latex/` folder, including `generated/datasheet.tex`, to an Overleaf project.
+4. Set `main.tex` as the main document and select pdfLaTeX.
+5. Click **Recompile** and download `main.pdf`.
+6. Save the downloaded PDF as `src/assets/v<currentVersion>.pdf`.
+7. Run `npm run datasheet:generate` again so the website includes the new PDF, then run `npm run build`.
+
+Overleaf compiles the generated LaTeX project but does not run the Node generator. Keep the generated files committed so the PDF can be reproduced manually in Overleaf.
 
 ---
 
