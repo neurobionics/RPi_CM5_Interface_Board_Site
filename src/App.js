@@ -3,8 +3,9 @@ import "./App.css";
 import InteractivePCB from "./InteractivePCB";
 import mechanicalSpecs from "./assets/mechanical_specs.png";
 import imuSensingAxes from "./assets/IMU_sensing_axes.png";
-import datasheetPDF from "./assets/RPi_CM5_interface_board_v.1.1.0_ Datasheet.pdf";
-import datasheetV100PDF from "./assets/RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf";
+import datasheetPDF from "./assets/v1.1.1.pdf";
+import datasheetV110PDF from "./assets/v1.1.0.pdf";
+import datasheetV100PDF from "./assets/v1.0.0.pdf";
 // import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
 
 function App() {
@@ -72,7 +73,7 @@ function About() {
       <div className="download-buttons-container">
         <button
           className="download-button"
-          onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_Datasheet.pdf')}
+          onClick={() => handleDownload(datasheetPDF, 'v1.1.1.pdf')}
         >
           <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -104,7 +105,7 @@ function SystemOverview() {
   return (
     <section className="section osl-card" id="system-overview">
       <h2>Interactive PCB Layout</h2>
-      <p className="pcb-version">v1.1.0</p>
+      <p className="pcb-version">v1.1.1</p>
       <p>
         Click on the individual components to learn more their functionality:
       </p>
@@ -151,7 +152,7 @@ function PowerSection() {
                 <td>
                   <strong>XT30</strong>
                 </td>
-                <td>15 - 53</td>
+                <td>15 - 48</td>
                 <td>26.67</td>
               </tr>
               <tr>
@@ -752,6 +753,33 @@ function Archive() {
             <tbody>
               <tr>
                 <td>
+                  <strong>v1.1.1</strong>
+                </td>
+                <td>August 2026</td>
+                <td>
+                  <div className="changelog-content">
+                    <strong>Changes:</strong>
+                    <ul>
+                      <li>Power supply layout improvements</li>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <button
+                    className="download-button"
+                    onClick={() => handleDownload(datasheetPDF, 'v1.1.1.pdf')}
+                  >
+                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Datasheet
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <strong>v1.1.0</strong>
                 </td>
                 <td>May 2026</td>
@@ -775,7 +803,7 @@ function Archive() {
                 <td>
                   <button
                     className="download-button"
-                    onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_v1.1.0_Datasheet.pdf')}
+                    onClick={() => handleDownload(datasheetV110PDF, 'v1.1.0.pdf')}
                   >
                     <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -814,7 +842,7 @@ function Archive() {
                 <td>
                   <button
                     className="download-button"
-                    onClick={() => handleDownload(datasheetV100PDF, 'RPi_CM5_Interface_Board_v1.0.0_Datasheet.pdf')}
+                    onClick={() => handleDownload(datasheetV100PDF, 'v1.0.0.pdf')}
                   >
                     <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
